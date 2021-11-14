@@ -1,6 +1,7 @@
 const express = require('express');
 const cors    = require('cors');
-var ejs = require('ejs');
+const logger = require('morgan');
+const { dbConnection } = require('../database/config');
 
 class Server {
 
@@ -14,12 +15,13 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         this.paths = {
-            home: '/'
+            home: '/',
+            lista: '/api/listas'
         }
 
 
         // Conectar a base de datos
-        // this.conectarDB();
+        this.conectarDB();
 
         // Middlewares
         this.middlewares();
@@ -29,20 +31,21 @@ class Server {
 
     }
 
-    // async conectarDB() {
-    //     await dbConnection();
-    // }
+    async conectarDB() {
+        await dbConnection();
+    }
 
 
     middlewares() {
-
-        this.app.use(express.urlencoded({ extended: false }));
-
         // CORS
         this.app.use(cors());
 
         // Lectura y parseo del body
         this.app.use(express.json());
+
+        this.app.use(logger('dev'));
+
+        this.app.use(express.urlencoded({ extended: false }));
 
         // Directorio Público
         this.app.use(express.static('public'));
@@ -51,6 +54,7 @@ class Server {
 
     routes() {
         this.app.use(this.paths.home, require('../routes/home'));
+        this.app.use(this.paths.lista, require('../routes/wikiPedia'));
     }
 
 
