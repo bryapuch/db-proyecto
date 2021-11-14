@@ -15,4 +15,8 @@ router.get('/map-Reduce', function (req, res, next) {
   res.render('mapReduce', { title: 'Datos Avanzados' });
 });
 
+router.get('/articulo/:titulo', function (req, res, next) {
+  res.render('articulo', { title: 'Datos Avanzados :: titulo' });
+});
+
 module.exports = router;
