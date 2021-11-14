@@ -8,7 +8,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
 
-        this.app.set('views','../views');
+        this.app.set('views','views');
         this.app.set('view engine', 'ejs');
 
         this.server = require('http').createServer(this.app);
@@ -45,12 +45,12 @@ class Server {
         this.app.use(express.json());
 
         // Directorio Público
-        this.app.use(express.static('../public'));
+        this.app.use(express.static('public'));
 
     }
 
     routes() {
-        this.app.use(this.paths.home, require('./routes/home'));
+        this.app.use(this.paths.home, require('../routes/home'));
     }
 
 
