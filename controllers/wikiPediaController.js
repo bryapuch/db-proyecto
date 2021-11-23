@@ -44,7 +44,7 @@ const changeArticle = async function(req = request, res = response){
         title: req.body.title
     
     })
-
+    console.log(articulo);
     res.status(204).send(articulo);
 
 
@@ -53,9 +53,9 @@ const changeArticle = async function(req = request, res = response){
 const newArticle = function(req=request, res = response ){
 
     const newWiki = new WikiPedia({
-        id: req.body.id,
-        text: req.body.text,
-        title: req.body.title
+        id      : req.body.idArticulo,
+        text    : req.body.textArticulo.trim(),
+        title   : req.body.titleArticulo.trim()
     });
 
     newWiki.save(function(err,wiki){
@@ -65,7 +65,7 @@ const newArticle = function(req=request, res = response ){
                 error: err
             });
         }
-        return res.status(201).json(wiki);
+        return res.redirect('/registrar?created=true');
     });
 }
 

@@ -16,7 +16,8 @@ router.get('/',async function (req, res) {
 });
 
 router.get('/registrar', function (req, res, next) {
-  res.render('registrar', { title: 'Datos Avanzados' });
+  let created = req.query.created;
+  res.render('registrar', { title: 'Datos Avanzados', created });
 });
 
 router.get('/map-Reduce', function (req, res, next) {
