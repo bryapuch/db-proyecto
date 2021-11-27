@@ -1,4 +1,5 @@
-const { Router } = require('express');
+
+const router = require('express').Router();
 
 const {
     obtenerLista,
@@ -6,15 +7,13 @@ const {
     deleteArticle,
     newArticle,
     obtenerOne
-} = require('../controllers/wikiPediaController.js');
-
-const router = Router();
+} = require('../controllers/ArticuloController.js');
 
 router.get('/', obtenerLista);
 
-router.get('/:title',obtenerOne);
+router.get('/:title', obtenerOne);
 
-router.post('/',newArticle);
+router.post('/', newArticle);
 
 router.put('/:id', changeArticle);
 

@@ -1,3 +1,4 @@
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -9,36 +10,17 @@
             EL articulo con ID <%= articuloId %> fue eliminado 
         </div>
     <% } %>
-    <h2 class="text-center">Buscar Principal</h2>
-
-    <div class="d-flex justify-content-center">
-        <div class="input-group">
-            <input class="form-control" type="search" name="buscador" id="buscador">
-            <span class="input-group-text" id="basic-addon1">
-                <svg id="i-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"
-                    fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                    <circle cx="14" cy="14" r="12" />
-                    <path d="M23 23 L30 30" />
-                </svg>
-            </span>
-        </div>
-        <button class="btn btn-primary m-1" type="submit">
-            Buscar
-        </button>
-    </div>
-
-
-
-    <div class="container d-flex flex-wrap justify-content-between">
+    <h2 class="text-center" style="margin-bottom: 12px;">Ultimos Articulos</h2>
+    <div class="container d-flex flex-wrap justify-content-evenly">
         <% articulos.forEach(function(articulo) { %>
-            <div class="card mt-2 mb-2" style="width: 18rem;">
+            <div class="card mt-2 mb-2 mr-4" style="width: 17rem;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <%= articulo.title %></h5>
+                        <%= articulo.title.substring(0, 20) %></h5>
                     <p class="card-text">
                         <%= articulo.text.substring(0, 200) %>
                     </p>
-                    <a href="articulo/<%= articulo.id%>" class="btn outline-btn-primary">Leer mas...</a>
+                    <a href="articulo/<%= articulo.id%>" class="">Leer mas...</a>
                 </div>
             </div>
          <% }); %>
@@ -48,10 +30,10 @@
 </main>
 
 <script>
+
     let msg = document.getElementById("alert-msg-delete");
+    
     if (msg){
-        setTimeout(()=>{
-            msg.remove();
-        }, 3000)
-    }
+        setTimeout(() => msg.remove(), 3000); }
+
 </script>

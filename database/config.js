@@ -1,10 +1,12 @@
+
 const mongoose = require('mongoose');
 
-const dbConnection = async() => {
+const dbConnection =async() => {
 
     try {
-
-        await mongoose.connect( process.env.MONGODB_CNN);
+        
+        await mongoose.connect(process.env.MONGODB_CNN);
+        // mongoose.connection.useDb(process.env.DATABASE_NAME)
     
         console.log('Base de datos online');
 

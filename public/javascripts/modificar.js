@@ -6,7 +6,7 @@ modificarBtn.addEventListener('click', ()=> {
     let text  = document.getElementById('texto-atr').value;
     let title = document.getElementById('titulo-atr').value;
 
-    fetch(`/api/listas/${id}`,{
+    fetch(`/api/articulos/${id}`,{
         method: "put",
         headers: {
             "Content-Type": "application/json"

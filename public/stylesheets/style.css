@@ -98,4 +98,21 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
+  .nav-item {
+
+    font-size: 1.2em;
+
+  }
   
+  .nav-item > a {
+
+    font-weight: bold;
+
+  }
+  
+  .nav-item:hover {
+
+    background-color: cadetblue;
+    border-radius: 0px 12px 12px 0px;
+
+  }

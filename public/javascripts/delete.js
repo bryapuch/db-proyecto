@@ -3,7 +3,7 @@ let eliminarBtn = document.getElementById("eliminar-btn");
 eliminarBtn.addEventListener('click', ()=> {
 
     let articuloId = document.getElementById("id-atr").value;
-    fetch(`/api/listas/${articuloId}`,{
+    fetch(`/api/articulos/${articuloId}`,{
         method: "delete"
     })
     .then((res) => {

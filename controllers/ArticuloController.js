@@ -1,24 +1,24 @@
-const { response, request } = require('express');
-const WikiPedia = require('../models/wikiPedia.js')
 
-const obtenerLista = function(req, res = response){
+const Articulo = require('../models/Articulo.js')
 
-    WikiPedia.find(function(err,wikis){
+const obtenerLista = function(req, res){
+
+    Articulo.find(function(err, articulos){
         if(err){
             return res.status(500).json({
-                message: 'Error when getting article.',
+                message: 'Error al obtener el articulo.',
                 error: err
             });
         }
-        return res.json(wikis);
+        return res.json(articulos);
     });
 }
 
-const obtenerOne = function(req = request, res = response){
+const obtenerOne = function(req, res){
 
     const OldTitle = req.params.title;
 
-    WikiPedia.findOne({title:OldTitle}, function(err,wiki){
+    Articulo.findOne({title:OldTitle}, function(err, articulo){
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting Article.',
@@ -34,11 +34,11 @@ const obtenerOne = function(req = request, res = response){
     });
 }
 
-const changeArticle = async function(req = request, res = response){
+const changeArticle = async function(req, res){
     
     const _id = req.params.id;
 
-    let articulo = await WikiPedia.findOneAndUpdate({id: _id}, {
+    let articulo = await Articulo.findOneAndUpdate({id: _id}, {
         
         text: req.body.text,
         title: req.body.title
@@ -52,13 +52,13 @@ const changeArticle = async function(req = request, res = response){
 
 const newArticle = function(req=request, res = response ){
 
-    const newWiki = new WikiPedia({
+    const newArticulo = new Articulo({
         id      : req.body.idArticulo,
         text    : req.body.textArticulo.trim(),
         title   : req.body.titleArticulo.trim()
     });
 
-    newWiki.save(function(err,wiki){
+    newArticulo.save(function(err, articulo){
         if(err){
             return res.status(500).json({
                 message: 'Error when creating new Article',
@@ -69,12 +69,12 @@ const newArticle = function(req=request, res = response ){
     });
 }
 
-const deleteArticle = function(req = request, res = response){
+const deleteArticle = function(req, res){
 
     const id = req.params.id;
     
     
-    WikiPedia.deleteOne({id}, function(err,wiki){
+    Articulo.deleteOne({id}, function(err, articulo){
         if(err){
             return res.status(500).json({
                 message: 'Error when deleting Article.',

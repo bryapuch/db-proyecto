@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors    = require('cors');
 const logger = require('morgan');
@@ -6,6 +7,7 @@ const { dbConnection } = require('../database/config');
 class Server {
 
     constructor() {
+        
         this.app = express();
         this.port = process.env.PORT;
 
@@ -16,7 +18,7 @@ class Server {
 
         this.paths = {
             home: '/',
-            lista: '/api/listas'
+            articulos: '/api/articulos'
         }
 
 
@@ -32,11 +34,14 @@ class Server {
     }
 
     async conectarDB() {
+        
         await dbConnection();
+
     }
 
 
     middlewares() {
+        
         // CORS
         this.app.use(cors());
 
@@ -53,16 +58,20 @@ class Server {
     }
 
     routes() {
-        this.app.use(this.paths.home, require('../routes/home'));
-        this.app.use(this.paths.lista, require('../routes/wikiPedia'));
+        
+        this.app.use(this.paths.home, require('../routes/HomeRoutes'));
+        this.app.use(this.paths.articulos, require('../routes/ArticuloRoutes'));
+
     }
-
-
+    
     listen() {
+        
         this.app.listen(this.port, () => {
             console.log('Servidor corriendo en puerto', this.port);
         });
+
     }
 
 }
+
 module.exports = Server;

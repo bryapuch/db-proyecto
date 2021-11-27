@@ -1,7 +1,8 @@
+
 const { Schema, model } = require('mongoose');
 
 
-const WikiPediaSchema = Schema({
+const ArticuloSchema = Schema({
     id:{
         type: String,
         unique: true
@@ -16,9 +17,4 @@ const WikiPediaSchema = Schema({
     }
 });
 
-WikiPediaSchema.methods.toJSON = function(){
-    const {_id, ...data} = this.toObject();
-    return data;
-}
-
-module.exports = model( 'WikiPedia', WikiPediaSchema);
+module.exports = model( 'Articulos', ArticuloSchema);

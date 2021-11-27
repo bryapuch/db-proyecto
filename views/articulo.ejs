@@ -39,7 +39,7 @@
                         El articulo no se pudo actualizar correctamente!!!
                     </div>
 
-                    <div class="container d-flex flex-column align-items-center fs-5">
+                    <div class="container d-flex flex-column align-items-center fs-5" style="margin-bottom: 24px;">
                         <div class="input-group m-3 container d-flex align-items-center">
                             <label class="me-3 p-1">ID Articulo</label>
                             <input class="form-control" id="id-atr" value="<%= articulos.id %>" disabled>
@@ -50,9 +50,7 @@
                         </div>
                         <div class=" input-groupm-3 container d-flex">
                             <label class="me-2">Descripcion</label>
-                            <textarea class="form-control" style="height: 400px;" id="texto-atr" name="text">
-                                <%= articulos.text %>
-                            </textarea>
+                            <textarea class="form-control" style="height: 400px;" id="texto-atr" name="text"><%= articulos.text %></textarea>
                         </div>
                         <div class="d-grid gap-5 d-md-flex justify-content-center container mt-3">
                             <button id="modificar-btn" class="btn btn-primary btn-lg form-control">
