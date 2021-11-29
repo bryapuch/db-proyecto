@@ -2,9 +2,10 @@
 const Articulo = require('../models/Articulo.js')
 /**
  * obtenerLista
- * @description :: Esta function retora todo los articulos
+ * @description :: Esta function retorna los articulos paginados
  */
 const obtenerLista = function(req, res){
+    let pagina = req.query.page || 1;
 
     Articulo.find(function(err, articulos){
         if(err){
@@ -14,7 +15,7 @@ const obtenerLista = function(req, res){
             });
         }
         return res.json(articulos);
-    });
+    }).skip((pagina - 1) * 6).limit(6);
 }
 /**
  * obtenerOne
