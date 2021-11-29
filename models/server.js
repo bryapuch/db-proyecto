@@ -56,14 +56,14 @@ class Server {
         this.app.use(express.static('public'));
 
     }
-
+    // inicializar las rutas
     routes() {
         
         this.app.use(this.paths.home, require('../routes/HomeRoutes'));
         this.app.use(this.paths.articulos, require('../routes/ArticuloRoutes'));
 
     }
-    
+    // funcion para escuchar el servidor que funciona correctamente
     listen() {
         
         this.app.listen(this.port, () => {

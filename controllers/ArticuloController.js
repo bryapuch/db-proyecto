@@ -1,6 +1,9 @@
 
 const Articulo = require('../models/Articulo.js')
-
+/**
+ * obtenerLista
+ * @description :: Esta function retora todo los articulos
+ */
 const obtenerLista = function(req, res){
 
     Articulo.find(function(err, articulos){
@@ -13,7 +16,10 @@ const obtenerLista = function(req, res){
         return res.json(articulos);
     });
 }
-
+/**
+ * obtenerOne
+ * @description :: Retorna un articulo tomado del response de parametro title.
+ */
 const obtenerOne = function(req, res){
 
     const OldTitle = req.params.title;
@@ -25,15 +31,18 @@ const obtenerOne = function(req, res){
                 error: err
             });
         }
-        if(!wiki){
+        if(!articulo){
             return res.status(404).json({
                 message: 'No such Article'
             });
         }
-        return res.json(wiki);
+        return res.json(articulo);
     });
 }
-
+/**
+ * changeArticle
+ * @description:: funcion que modifica el articulo tomado del request de parametro del id. Se modifica tanto el texto y el titulo del articulo
+ */
 const changeArticle = async function(req, res){
     
     const _id = req.params.id;
@@ -44,12 +53,12 @@ const changeArticle = async function(req, res){
         title: req.body.title
     
     })
-    console.log(articulo);
     res.status(204).send(articulo);
-
-
 }
-
+/**
+ * newArticle
+ * @description:: esta funcion permite crear un articulo nuevo
+ */
 const newArticle = function(req=request, res = response ){
 
     const newArticulo = new Articulo({
@@ -68,7 +77,10 @@ const newArticle = function(req=request, res = response ){
         return res.redirect('/registrar?created=true');
     });
 }
-
+/**
+ * deleteArticle
+ * @description:: Esta funcion elimina el articulo tomado de responde de parametro por id.
+ */
 const deleteArticle = function(req, res){
 
     const id = req.params.id;
