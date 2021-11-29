@@ -22,6 +22,14 @@ npm start
 ### Agregar articulo
 ![registrar articulo](media/nuevoArticulo.png)
 
+### Tarea MapReduce
+![carga](media/carga_mapreduce.png)
+
+![resultado](media/resultado_mapreduce.png)
+
+### Servidor MongoDB
+![carga](media/mongo.png)
+
 ### Autores ✒️
 * **Bryan Puchaicela** - *Trabajo* - [bryapuch](https://github.com/bryapuch)
 

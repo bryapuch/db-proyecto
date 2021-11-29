@@ -62,45 +62,53 @@
         
         (async function(){
 
-        let socket = io(`//<%= clusterip %>:8080`);
+            // Inicialización del cliente para la conexión mediante sockets
+            let socket = io(`//<%= clusterip %>:8080`);
 
-        let loader = document.querySelector(".loader"),
-            resultBox = document.querySelector(".results"),
-            [inputBox, countBtn] = document.querySelector('.input-group').children;
+            let loader = document.querySelector(".loader"),
+                resultBox = document.querySelector(".results"),
+                [inputBox, countBtn] = document.querySelector('.input-group').children;
 
-        countBtn.addEventListener('click', (event) => {
-            
-            let word = inputBox.value;
-            let taskId = (new Date()).getTime();
-
-            countBtn.disabled = true;
-            inputBox.disabled = true;
-            loader.style.opacity = "1";
-
-            socket.emit("new mapreduce", [taskId, word]);
-            socket.on(`finished task ${taskId}`, (data) => {
+            // Manejador del evento click para la tarea MapReduce
+            countBtn.addEventListener('click', (event) => {
                 
-                let content = '';
-                console.log(data);
-
-                if(data) {
-
-                    resultBox.textContent = '';
-                    let resultado = data.split('\n').find( 
-                        (palabra) => palabra.substr(0, word.length).toLowerCase() == word.toLowerCase() ).split('\t');
-                    content = `La palabra ${resultado[0]} se encontro: ${resultado[1]} veces en los títulos de los articulos`;
+                let word = inputBox.value;
+                // Generación de id para la recepción del resultado de la operación MapReduce
+                let taskId = (new Date()).getTime();
+                resultBox.textContent = '';
                 
-                } else {
-                    content = "No se encontraron coincidencias para la palabra"; }
+                countBtn.disabled = true;
+                inputBox.disabled = true;
+                loader.style.opacity = "1";
 
-                resultBox.textContent = content;
-                countBtn.disabled = false;
-                inputBox.disabled = false;
-                loader.style.opacity = "0";
-            
+                // Se emite el evento para una nueva tarea MapReduce
+                socket.emit("new mapreduce", [taskId, word]);
+                socket.on(`finished task ${taskId}`, (data) => {
+                    
+                    let content = '';
+                    console.log(data);
+
+                    if(data) {
+
+                        // Filtrado de los datos de la tarea
+                        let resultado = data.split('\n').filter( 
+                            (palabra) => palabra.substr(0, word.length).toLowerCase() == word.toLowerCase() );
+                        
+                        // Conteo de las palabras
+                        resultado = resultado.reduce((a, b) => a + parseInt(b.split('\t')[1]), 0);
+                        content = `La palabra ${word} se encontro: ${resultado} veces en los títulos de los articulos`;
+                        
+                    } else {
+                        content = "No se encontraron coincidencias para la palabra"; }
+
+                    resultBox.textContent = content;
+                    countBtn.disabled = false;
+                    inputBox.disabled = false;
+                    loader.style.opacity = "0";
+                
+                });
+
             });
-
-        });
 
     })();
 
