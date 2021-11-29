@@ -98,21 +98,69 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
-  .nav-item {
 
-    font-size: 1.2em;
+/* Estilos app
+========================================================= */
 
-  }
+#loader {
+
+  margin-top: 16px;
+  width: 180px;
   
-  .nav-item > a {
+}
 
-    font-weight: bold;
+.nav-item {
 
-  }
-  
-  .nav-item:hover {
+  font-size: 1.2em;
 
-    background-color: cadetblue;
-    border-radius: 0px 12px 12px 0px;
+}
 
-  }
+.nav-item > a {
+
+  font-weight: bold;
+
+}
+
+.nav-item:hover {
+
+  background-color: cadetblue;
+  border-radius: 0px 12px 12px 0px;
+
+}
+
+.loader {
+
+  opacity: 0;
+
+}
+
+.loader > p {
+
+  margin-top: 12px;
+  margin-left: -30px;
+
+}
+
+.results {
+
+  font-size: 2em;
+
+}
+
+#loader {
+  -webkit-animation:spin 1.2s linear infinite;
+  -moz-animation:spin 1.2s linear infinite;
+  animation:spin 1.2s linear infinite;
+}
+@-moz-keyframes spin { 
+  100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+  100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+  100% { 
+      -webkit-transform: rotate(360deg); 
+      transform:rotate(360deg); 
+  } 
+}
