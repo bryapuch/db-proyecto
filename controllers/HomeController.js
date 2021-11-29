@@ -24,7 +24,6 @@ const registrarArticulo = function (req, res, next) {
 const mapReduce = async function (req, res, next) {
 
     let clusterip = process.env.DATAPROC_CLUSTER;
-    const mapReduceService = require('../services/MapReduceService')();
 
     res.render('mapReduce', { title: "MapReduce", clusterip });
   
